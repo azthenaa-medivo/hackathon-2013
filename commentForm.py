@@ -27,4 +27,5 @@ class CommentFormHandler(handler.Handler):
 		else:
 			e = database.Comment(username=user_name,trip_id=int(trip_id),message=message)
 			e.put()
+			cache.update_comments(int(trip_id))
 			self.redirect("/"+trip_id)
