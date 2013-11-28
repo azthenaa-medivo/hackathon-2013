@@ -36,7 +36,6 @@ body {
 
 #nav ul li {
 	display: inline;
-	background: #0489B1 ;
 	color: #000000 ;
 	border: 1px solid #000 ;
 	padding:11px 0;
@@ -44,14 +43,14 @@ body {
 
 #nav ul li a {
 	text-align: center;
+	background: #568203;
 	padding: 11px;
-	background: #0489B1 ;
 	color: #000000 ;
 	text-decoration: none ;
 }
 
 #nav ul li a:hover, #nav li a:focus, #nav li a:active {
-	background: #58D3FF ;
+	background: #7fff00 ;
 	text-decoration: none ;
 }
 
