@@ -3,12 +3,17 @@
 {% block menu %}
 <li>
 	<a href="/{{trip.key().id()}}/comment" title="Comment this trip">
-		Add a comment
+		Comment
 	</a>
 </li>
 <li>
 	<a href="/{{trip.key().id()}}/share" title="Share this trip">
-		Share with a friend
+		Share
+	</a>
+</li>
+<li>
+	<a href="http://client01.chat.mibbit.com/?channel=%23broccotrip{{trip.key().id()}}&server=irc.chat-irc.fr" target="_blank" title="Join the chat room of this trip">
+		Chat room
 	</a>
 </li>
 {% endblock %}
