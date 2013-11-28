@@ -13,13 +13,13 @@ class TripHandler(handler.Handler):
 
 	def get(self,trip_id):
 		trip = cache.get_trip(trip_id)
-		comments=cache.get_comments(trip_id)
+		comments=[]
 		self.render_trip(trip,comments,"");
 		
 	def post(self,trip_id):
 		form_type = self.request.get('formType')
 		trip = cache.get_trip(trip_id)
-		comments=cache.get_comments(trip_id)
+		comments=[]
 		if form_type == "commentForm":
 			self.add_comment(trip,comments)
 			

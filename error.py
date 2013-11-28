@@ -1,10 +1,5 @@
-﻿import re
-import cgi
-import string
+﻿import handler
 
-def escape_html(s):
-	return cgi.escape(s, quote = True)
-	
 class ErrorHandler(handler.Handler):
 	def write_form(self):
 		self.render("error.html")
