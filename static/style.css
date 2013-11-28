@@ -137,3 +137,8 @@ body {
 .centerError {
 	text-align:center;
 	}
+	
+.shareTextArea {
+	height:250px;
+	width:500px;
+}

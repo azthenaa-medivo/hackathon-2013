@@ -15,3 +15,11 @@ Dear %s :
 The Brocco Team
 """ % ( username,trip_name, link )
 		message.send()
+		
+def share_trip(receiver,messageBody):
+		message = mail.EmailMessage()
+		message.sender = "BroccoTeamBot <broccotripteam@gmail.com>"
+		message.subject="Someone shared a trip with you !"
+		message.to = receiver
+		message.body = messageBody
+		message.send()
