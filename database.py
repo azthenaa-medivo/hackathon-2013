@@ -7,9 +7,13 @@ class Comment(db.Model):
 	posted = db.DateTimeProperty(auto_now_add=True)
 	message = db.TextProperty(required=True)
 	
-	def render(self):
-		self._render_text = self.content.replace('\n', '<br>')
-		return handler.render_str("post.html", p = self)
+	def __cmp__(self, other):
+		if self.posted > other.posted:
+			return 1
+		elif self.posted < other.posted:
+			return -1
+		else:
+			return 0
 
 class Proposition(db.Model):
 	numero = db.IntegerProperty(required = True)
