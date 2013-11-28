@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<section class="trip">
+		<div class="trip-heading">
+			<div class="trip-title">
+				<a href="/{{trip.hash}}" class="trip-title">{{trip.title}}</a>
+			</div>
+			<div class="post-date">
+				{{trip.created.strftime("%b %d, %Y")}}
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+{% endblock %}
