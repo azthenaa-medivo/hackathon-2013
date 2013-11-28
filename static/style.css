@@ -78,14 +78,16 @@ body {
 }
 
 .page-heading {
+	text-align: center;
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: -5px;
-	width: 200px;
+	width: 250px;
     position: relative;
     background-color: #F0FFF0;
 	border: solid 5px #00B815;
 	border-radius: 10px;
+	padding: 5px;
     /*border-bottom: 3px solid #008B8B;*/
 }
 
@@ -98,4 +100,28 @@ body {
 	background-color: #F0FFF0;
 	border: solid 5px #00B815;
 	border-radius: 10px;
+}
+
+.trip-title
+{
+	color: #378000;
+	font-size: 150%;
+	text-decoration: none;
+}:not(.comment:last-child)
+
+
+.trip-title:hover {
+	text-decoration: underline;
+}
+
+.comment
+{
+	border-bottom: solid 1px #378000;
+	border-bottom-width: 50%;
+	padding: 10px;
+}
+
+.comment:last-child
+{
+	border-bottom: solid 2px #FF0000;
 }
