@@ -2,8 +2,13 @@
 
 {% block menu %}
 <li>
-	<a href="/{{trip.key().id()}}/comment" title="Create a new trip !">
+	<a href="/{{trip.key().id()}}/comment" title="Comment this trip">
 		Add a comment
+	</a>
+</li>
+<li>
+	<a href="/{{trip.key().id()}}/share" title="Share this trip">
+		Share with a friend
 	</a>
 </li>
 {% endblock %}
