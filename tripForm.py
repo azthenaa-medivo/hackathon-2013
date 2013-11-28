@@ -2,6 +2,7 @@ from google.appengine.ext import db
 
 import database
 import handler
+import security
 
 class TripFormHandler(handler.Handler):
 	def write_form(self, user_name="", trip_name="", error_username="", error_tripname=""):
