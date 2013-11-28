@@ -20,6 +20,7 @@
 		</div>
 		
 		<section class="formulaire">
+			{% if comments %}
 			<div class="comments">
 				{% for comment in comments %}
 					<div class="comment">
@@ -35,6 +36,7 @@
 					</div>
 				{% endfor %}
 			</div>
+			{% endif %}
 		</section>
 	</div>
 {% endblock %}
