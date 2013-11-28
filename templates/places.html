@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<section class="tripform-section">
+		<div class="page-heading">
+			<h2>
+				Places
+			</h2>
+		</div>
+		<p>results : {% print(total_results) %}</p>
+		<p>page : {% print(page) %}/{% print(total_pages) %}</p>
+		<br>
+		<p>
+		{% for place in places_list %}
+			<h2>{% print(place.heading) %} </h2>
+			origine : {% print(place.origin) %} <br>
+			minimumStayNight : {% print(place.minimum_stay_night) %} <br>
+			pricePer : {% print(place.price_per) %} <br>
+			bedCount : {% print(place.bed_count) %} <br>
+			occupancy : {% print(place.occupancy) %} <br>
+			provider : {% print(place.provider) %} <br>
+			description : {% print(place.description) %} <br>
+			pid : {% print(place.pid) %} <br>
+			price : {% print(place.price) %} <br>
+			link : {% print(place.link) %} <br>
+			country : {% print(place.country) %} <br>
+			nid : {% print(place.nid) %} <br>
+			bathroomCount : {% print(place.bathroomcount) %} <br>
+			bedroomCount : {% print(place.bedroomcount) %} <br>
+			room type : {% print(place.room_type+' ('+place.room_type_alias+')') %} <br>
+			prop type : {% print(place.prop_type+' ('+place.prop_type_alias+')') %} <br>
+			position : {% print(place.latitude) %} :: {% print(place.longitude) %} <br>
+			unavailable :  <br>
+				{% for item in place.unavailable %}
+				- {% print(item) %} <br>
+				{% endfor %}
+			amenities :  <br>
+				{% for item in place.amenities %}
+				- {% print(item) %} <br>
+				{% endfor %}
+			photos :  <br>
+				{% for item in place.photos %}
+				- {% print(item) %} <br>
+				{% endfor %}
+		{% endfor %}
+		<p>
+	</section>
+{% endblock %}
