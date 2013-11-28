@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<HTML>
+ 
+ <HEAD>
+  <LINK rel="stylesheet" type="text/css" href="../static/style.css">
+  <title>BroccoTrip</title>
+ </HEAD>
+ 
+ <BODY>
+ 	<div class="top-page">
+		<a href="/" class="top-a">
+			<div class="shadow">
+				<img class="top-image" src="../static/logo.png" />
+				<img class="top-image" src="../static/banner.png" />
+			</div>
+		</a>
+	</div>
+	<div id="nav">
+		<section id="main" class="formulaire">
+			<p>
+				Sorry, there was an error. Maybe the page you selected does not exist.
+				We apologise for the inconvenience.
+			</p>
+			<a href="/" title="back to the hub">
+				Back to the Hub
+			</a>
+		</section>
+	</div>
+	<br>	
+	<section id="content">
+		{% block content %}
+		{% endblock %}
+	</section>
+	<br>
+	<br>
+	<br>
+</body>
+
+</html>
+
