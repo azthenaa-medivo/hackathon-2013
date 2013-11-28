@@ -27,34 +27,6 @@
 					</div>
 				{% endfor %}
 			</div>
-
-			<form method="post" class="commentForm">
-				<input type="hidden" name="formType" value="commentForm">
-				<table>
-					<tr>
-						<td class="label">
-							Username
-						</td>
-						<td>
-							<input type="text" name="username" value="{{ user_name }}" class="commentInput" required>
-						</td>
-						<td class="error">
-							{{ error_username }}
-						</td>
-					</tr>
-					<tr>
-						<td class="label">
-							Message
-						</td>
-						<td>
-							<textarea name="message" class="commentMessage" required>{{ message }}</textarea>
-						</td>
-					</tr>	
-				</table>
-				<div class="submitComment">
-					<input type="submit" value="Submit">
-				</div>
-			</form>
 		</section>
 	</div>
 {% endblock %}
