@@ -33,6 +33,6 @@ class TripFormHandler(handler.Handler):
 		if not (username and tripname):
 			self.write_form( security.escape_html(user_name), security.escape_html(trip_name), error_username, error_tripname)
 		else:
-			e = database.Discussion(title=trip_name,comments=[],sondages=[])
+			e = database.Discussion(title=trip_name)
 			e.put()
 			self.redirect("/"+str(e.key().id()))

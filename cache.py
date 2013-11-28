@@ -10,16 +10,19 @@ def get_trip(trip_id):
 		trip = database.Discussion.get_by_id(int(trip_id))
 		if trip:
 			memcache.set(key,trip)
-			get_comments(trip_id)
 	return trip
 
 def get_comments(trip_id):
 	key=trip_id+"comments"
 	comments=memcache.get(key)
 	if comments is None or not comments:
-		trip=get_trip(trip_id)
-		comments=[]
-		if comments:
-			comments=sorted(comments)
-			memcache.set(key,comments)
+		comments=db.GqlQuery("SELECT * FROM Comment WHERE trip_id = :1 ORDER BY posted DESC",trip_id).fetch(None)
+		comments=list(comments)
+		memcache.set(key,comments)
 	return comments
+	
+def update_comments(trip_id):
+	key=str(trip_id)+"comments"
+	comments=db.GqlQuery("SELECT * FROM Comment WHERE trip_id = :1 ORDER BY posted DESC",trip_id).fetch(None)
+	comments=list(comments)
+	memcache.set(key,comments)
