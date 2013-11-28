@@ -57,3 +57,8 @@ body {
 .error {
     color: red;
 }
+
+.page-heading {
+    position: relative;
+    border-bottom: 3px solid #008B8B;
+}
