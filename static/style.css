@@ -37,7 +37,6 @@ body {
 #nav ul li {
 	display: inline;
 	color: #000000 ;
-	border: 1px solid #000 ;
 	padding:11px 0;
 }
 
@@ -45,6 +44,7 @@ body {
 	text-align: center;
 	background: #568203;
 	padding: 11px;
+	border: 1px solid #000 ;
 	color: #000000 ;
 	text-decoration: none ;
 }
