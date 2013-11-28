@@ -7,7 +7,8 @@ class CommentFormHandler(handler.Handler):
 	def write_form(self,trip_id,username="", message="", error_username=""):
 		trip=cache.get_trip(trip_id)
 		if trip:
-			self.render("commentForm.html", trip=trip, username=username, message=message, error_username=error_username) 
+			comments=cache.get_comments(trip_id)
+			self.render("commentForm.html", trip=trip, comments=comments, username=username, message=message, error_username=error_username) 
 		else:
 			self.redirect("/error")
 
@@ -23,7 +24,7 @@ class CommentFormHandler(handler.Handler):
 		error_username=""
         
 		if not username :
-			self.write_form(trip_id,username,message,"That's not a valid username.")
+			self.write_form(trip_id,user_name,message,"That's not a valid username.")
 		else:
 			e = database.Comment(username=user_name,trip_id=int(trip_id),message=message)
 			e.put()
