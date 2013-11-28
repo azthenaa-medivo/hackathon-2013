@@ -31,7 +31,7 @@ body {
 
 .top-image {
 	display: inline-block;
-	vertical-align: middle;
+	vertical-align: middle;w
 }
 
 #content {
@@ -74,6 +74,24 @@ body {
 }
 
 .page-heading {
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: -5px;
+	width: 200px;
     position: relative;
-    border-bottom: 3px solid #008B8B;
+    background-color: #F0FFF0;
+	border: solid 5px #00B815;
+	border-radius: 10px;
+    /*border-bottom: 3px solid #008B8B;*/
+}
+
+.tripform-section {
+	text-align: center;
+}
+
+.formulaire {
+	padding: 10px;
+	background-color: #F0FFF0;
+	border: solid 5px #00B815;
+	border-radius: 10px;
 }
