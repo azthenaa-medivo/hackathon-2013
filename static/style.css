@@ -6,17 +6,32 @@ body {
     margin: 0 auto;
     padding: 10px;
     color: #000;
-	background-image:url("background.jpg"),url("background.jpg"), url("background.jpg");
+	background-image: url("background.jpg");
 	background-repeat:repeat-y,repeat-y, repeat-x;
 	background-position: left top, right top,left top;
 }
 
 .top-page {
-    display: block;
+    display: table-cell;
     text-align: center;
+    vertical-align: middle;
 	margin-top: 75px;
     margin-bottom: 40px;
+    margin-right: auto;
+	margin-left: auto;
+    width: 80%;
     text-decoration: none;
+}
+
+.top-page *
+{
+	text-align: center;
+	vertical-align: middle;
+}
+
+.top-image {
+	display: inline-block;
+	vertical-align: middle;
 }
 
 #content {
