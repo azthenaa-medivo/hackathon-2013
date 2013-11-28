@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 
+{% block menu %}
+<li>
+	<a href="/{{trip.key().id()}}/comment" title="Create a new trip !">
+		Add a comment
+	</a>
+</li>
+{% endblock %}
+
 {% block content %}
 	<section class="trip">
 		<div class="page-heading">
 			<div class="trip-title">
-				<a href="/{{trip.key().id()}}" class="trip-title">{{trip.title}}</a>
+				<a href="" class="trip-title">{{trip.title}}</a>
 			</div>
 			<div class="post-date">
 				{{trip.created.strftime("%c")}}

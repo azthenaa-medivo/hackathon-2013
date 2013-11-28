@@ -18,7 +18,7 @@ def get_comments(trip_id):
 	comments=memcache.get(key)
 	if comments is None or not comments:
 		trip=get_trip(trip_id)
-		comments=database.Comment.get(trip.comments)
+		comments=[]
 		if comments:
 			comments=sorted(comments)
 			memcache.set(key,comments)
