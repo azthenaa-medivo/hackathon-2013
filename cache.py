@@ -10,7 +10,6 @@ def get_trip(trip_id):
 		trip = database.Discussion.get_by_id(int(trip_id))
 		if trip:
 			memcache.set(key,trip)
-			get_comments(trip_id)
 	return trip
 
 def get_comments(trip_id):

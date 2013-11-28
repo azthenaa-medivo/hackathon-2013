@@ -9,7 +9,7 @@ class TripHandler(handler.Handler):
 		if trip is not None:
 			self.render("trip.html",trip=trip,comments=comments,error_username=error_username)
 		else:
-			self.response.out.write("This is not the trip you are looking for !")
+			self.redirect("/error")
 
 	def get(self,trip_id):
 		trip = cache.get_trip(trip_id)
