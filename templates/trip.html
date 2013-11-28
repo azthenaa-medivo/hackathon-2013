@@ -4,13 +4,52 @@
 	<section class="trip">
 		<div class="trip-heading">
 			<div class="trip-title">
-				<a href="/{{trip.hash}}" class="trip-title">{{trip.title}}</a>
+				<a href="/{{trip.key().id()}}" class="trip-title">{{trip.title}}</a>
 			</div>
 			<div class="post-date">
-				{{trip.created.strftime("%b %d, %Y")}}
+				{{trip.created.strftime("%c")}}
 			</div>
 		</div>
+		
+		{% for comment in comments %}
+			<div class="comment">
+				<div class="commentUserName">
+					{{ comment.username }}
+				</div>
+				<div class="commentPosted">
+					{{ comment.posted.strftime("%c") }}
+				</div>
+				<div class="commentMessage">
+					{{ comment.message }}
+				</div>
+			</div>
+		{% endfor %}
+		<form method="post" class="commentForm">
+			<input type="hidden" name="formType" value="commentForm">
+			<table>
+				<tr>
+					<td class="label">
+						Username
+					</td>
+					<td>
+						<input type="text" name="username" value="{{ user_name }}" class="commentInput" required>
+					</td>
+					<td class="error">
+						{{ error_username }}
+					</td>
+				</tr>
+				<tr>
+					<td class="label">
+						Message
+					</td>
+					<td>
+						<textarea name="message" class="commentMessage" required>{{ message }}</textarea>
+					</td>
+				</tr>	
+			</table>
+			<div class="submitComment">
+				<input type="submit" value="Submit">
+			</div>
+		</form>
 	</div>
-	<br>
-	<br>
 {% endblock %}
