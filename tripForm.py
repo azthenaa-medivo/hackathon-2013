@@ -20,12 +20,6 @@ def valid_trip_name(trip_name):
 	
 def escape_html(s):
 	return cgi.escape(s, quote = True)
-	
-def make_salt():
-    return ''.join(random.choice(string.letters) for x in xrange(7))
-
-def make_hash(user_name, trip_name):
-    return hashlib.sha256(user_name + trip_name + make_salt()).hexdigest()
 
 class TripFormHandler(handler.Handler):
 	def write_form(self, user_name="", trip_name="", error_username="", error_tripname=""):
@@ -56,7 +50,6 @@ class TripFormHandler(handler.Handler):
 		if not (username and tripname):
 			self.write_form( escape_html(user_name), escape_html(trip_name), error_username, error_tripname)
 		else:
-			hash=make_hash(user_name,trip_name)
-			e = database.Discussion(hash=hash,title=trip_name,comments=[],sondages=[])
+			e = database.Discussion(title=trip_name,comments=[],sondages=[])
 			e.put()
-			self.redirect(hash)
+			self.redirect("/"+str(e.key().id()))

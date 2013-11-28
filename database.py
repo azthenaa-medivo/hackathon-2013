@@ -27,7 +27,6 @@ class Sondage(db.Model):
 	result = db.ReferenceProperty(Reponse,required=False)
 
 class Discussion(db.Model):
-	hash = db.StringProperty(required=True)
 	title = db.StringProperty(required=True)
 	created = db.DateTimeProperty(auto_now_add=True)
 	comments = db.ListProperty(db.Key,required=True)
