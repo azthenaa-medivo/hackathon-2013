@@ -11,6 +11,7 @@
 		<div class="hub">
 			<p>Total results : {{total_results}}</p>
 			<p>Page : {{page}}/{{total_pages}}</p>
+			<p>{{pageLinks | safe}}</p>
 				<section class="places">
 				{% for place in places_list %}
 				<div class="place">
@@ -34,7 +35,7 @@
 					<span class="criteria">Number of beds :</span><span class="criteriaValue">{{place.bed_count}} </span>
 					<span class="criteria">Occupancy :</span><span class="criteriaValue">{{place.occupancy}} </span>
 					<span class="criteria">Provider :</span><span class="criteriaValue">{{place.provider}} </span>
-					<span class="criteria">Description :</span><span class="criteriaValue"> {{place.description}} </span>
+					<span class="criteria">Description :</span><span class="criteriaValue"> {{place.description | safe}} </span>
 					<span class="criteria">PID :</span><span class="criteriaValue"> {{place.pid}} </span>
 					<span class="criteria">Price :</span><span class="criteriaValue"> {{place.price}} </span>
 					<span class="criteria">Link :</span><span class="criteriaValue"> </span>
