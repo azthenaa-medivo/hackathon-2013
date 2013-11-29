@@ -14,15 +14,15 @@ def get_trip(trip_id):
 
 def get_comments(trip_id):
 	key=trip_id+"comments"
-	comments=memcache.get(key)
+	comments = memcache.get(key)
 	if comments is None or not comments:
-		comments=db.GqlQuery("SELECT * FROM Comment WHERE trip_id = :1 ORDER BY posted DESC",trip_id).fetch(None)
+		comments=db.GqlQuery("SELECT * FROM Comment WHERE trip_id = :1 ORDER BY posted DESC",int(trip_id)).fetch(None)
 		comments=list(comments)
 		memcache.set(key,comments)
 	return comments
 	
 def update_comments(trip_id):
-	key=str(trip_id)+"comments"
-	comments=db.GqlQuery("SELECT * FROM Comment WHERE trip_id = :1 ORDER BY posted DESC",trip_id).fetch(None)
+	key=trip_id+"comments"
+	comments=db.GqlQuery("SELECT * FROM Comment WHERE trip_id = :1 ORDER BY posted DESC",int(trip_id)).fetch(None)
 	comments=list(comments)
 	memcache.set(key,comments)
