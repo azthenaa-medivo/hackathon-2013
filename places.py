@@ -78,7 +78,8 @@ class placesHandler(handler.Handler):
 			page_links += " ... <a href='/_places?page="+ str(page+20) +""+ citySearch +"' >"+ str(page+20) +"</a> "
 		if page < (maxPage - 50) :
 			page_links += " ... <a href='/_places?page="+ str(page+50) +"' >"+ str(page+50) +"</a> "
-		page_links += " ... <a href='/_places?page="+ str(maxPage) +""+ citySearch +"' >"+ str(maxPage) +"</a> "
+		if page > 6:
+			page_links += " ... <a href='/_places?page="+ str(maxPage) +""+ citySearch +"' >"+ str(maxPage) +"</a> "
 		return page_links
 
 	def render_id(self, place_id):
