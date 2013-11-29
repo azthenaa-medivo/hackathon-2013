@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<section class="tripform-section">
+		<div class="page-heading">
+			<h2>
+				Places
+			</h2>
+		</div>
+		<p>results : {{total_results}}</p>
+		<p>page : {{page}}/{{total_pages}}</p>
+		<br>
+		<p>
+		{% for place in places_list %}
+			<h2><a href='{{place.link}}'> {{place.heading}} </a></h2>
+			{% for item in place.photos %}
+				<img src='{{item}}' /> <br>
+			{% endfor %}
+			origine : {{place.origin}} <br>
+			minimumStayNight : {{place.minimum_stay_night}} <br>
+			pricePer : {{place.price_per}} <br>
+			bedCount : {{place.bed_count}} <br>
+			occupancy : {{place.occupancy}} <br>
+			provider : {{place.provider}} <br>
+			description : {{place.description}} <br>
+			pid : {{place.pid}} <br>
+			price : {{place.price}} <br>
+			link :  <br>
+			country : {{place.country}} <br>
+			nid : {{place.nid}} <br>
+			bathroomCount : {{place.bathroomcount}} <br>
+			bedroomCount : {{place.bedroomcount}} <br>
+			room type : {{place.room_type}} ({{place.room_type_alias}}) <br>
+			prop type : {{place.prop_type}} ({{place.prop_type_alias}}) <br>
+			position : {{place.latitude}} :: {{place.longitude}} <br>
+			unavailable :  <br>
+				{% for item in place.unavailable %}
+				- {{item}} <br>
+				{% endfor %}
+			amenities :  <br>
+				{% for item in place.amenities %}
+				- {{item}} <br>
+				{% endfor %}
+			photos :  <br>
+
+		{% endfor %}
+		<p>
+	</section>
+{% endblock %}

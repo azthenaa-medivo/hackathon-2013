@@ -2,8 +2,13 @@
 
 {% block menu %}
 <li>
-	<a href="/{{trip.key().id()}}/comment" title="Comments">
-		Add a comment
+	<a href="/{{trip.key().id()}}/share" title="Share this trip">
+		Share
+	</a>
+</li>
+<li>
+	<a href="http://client01.chat.mibbit.com/?channel=%23broccotrip{{trip.key().id()}}&server=irc.chat-irc.fr" target="_blank" title="Join the chat room of this trip">
+		Chat room
 	</a>
 	<a href="/{{trip.key().id()}}/surveys" title="Polls">
 		Polls
@@ -21,25 +26,77 @@
 				{{trip.created.strftime("%c")}}
 			</div>
 		</div>
-		
-		<section class="formulaire">
+		<section class="tripDescription formulaire-top">
+			<div>
+				<h2>
+					Description
+				</h2>
+			</div>
+			<div>{{trip.description}}</div>
+		</section>
+		<section class="formulaire-top">
+				<h2>
+					Comments
+				</h2>
 			{% if comments %}
-			<div class="comments">
-				{% for comment in comments %}
-					<div class="comment">
-						<div class="commentUserName">
-							{{ comment.username }}
-						</div>
-						<div class="commentPosted">
-							{{ comment.posted.strftime("%c") }}
-						</div>
+				<div>
+
+				</div>
+				<div class="comments">
+					<table class="comments-table">
+					{% for comment in comments %}
+						<tr class="comment">
+							<td class="commentUserName">
+								{{ comment.username }}
+							</td>
+							<td class="commentPosted">
+								{{ comment.posted.strftime("%c") }}
+							</td>
+						</tr>
+					</table>
 						<div class="commentMessage">
 							{{ comment.message }}
 						</div>
-					</div>
-				{% endfor %}
-			</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<span class="no-comment">No comment~</span>
 			{% endif %}
+		</section>
+		<div class="commentForm formulaire">
+			
+		<section id="main" class="commentFormulaire">
+			<div>
+				<h2>
+					Add a comment
+				</h2>
+			</div>
+			<div class="comment-form">
+				<form method="post">
+				<table>
+					<tr>
+						<td class="label">
+							Username
+						</td>
+						<td>
+							<input type="text" name="username" value="{{ username }}" required>
+						</td>
+						<td class="error">
+							{{ error_username }}
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							Message
+						</td>
+						<td >
+							<textarea name="message" class="b" required>{{ message }}</textarea>
+						</td>
+					</tr>
+				</table>
+				<input class="submitButton" type="submit" value="Submit">
+			</form>
+		</div>
 		</section>
 	</div>
 {% endblock %}

@@ -19,6 +19,16 @@ indexes:
 - kind: Survey
   properties:
   - name: trip_id
+
+- kind: Comment
+  properties:
+  - name: tripid
+  - name: posted
+    direction: desc
+
+- kind: Comment
+  ancestor: yes
+  properties:
   - name: posted
     direction: desc
 

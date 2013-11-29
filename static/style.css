@@ -77,6 +77,10 @@ body {
     color: red;
 }
 
+#main {
+	text-align: left;
+}
+
 .page-heading {
 	text-align: center;
 	margin-right: auto;
@@ -120,12 +124,41 @@ body {
 
 .comment {
 	border-bottom: solid 1px #378000;
-	border-bottom-width: 50%;
 	padding: 10px;
 }
 
 .comment:last-child {
-	border-bottom: solid 2px #FF0000;
+	border-bottom: solid 0px #FF0000;
+}
+
+.comment-form {
+	text-align: left;
+}
+
+.comments {
+	text-align: left;
+}
+
+.commentUserName {
+	width: 300px;
+	border-bottom: solid 1px black;
+}
+
+.commentPosted {
+	display: inline-table;
+	text-align: right;
+}
+
+.b {
+	height: 100px;
+	width: 300px;
+	max-width: 300px;
+	max-height: 100px;
+}
+
+.submitButton
+{
+	padding: 10px;
 }
 
 .error-image {
@@ -136,4 +169,21 @@ body {
 
 .centerError {
 	text-align:center;
+	}
+	
+.shareTextArea {
+	height:250px;
+	width:500px;
+}
+
+.formulaire-top {
+	padding: 10px;
+	background-color: #F0FFF0;
+	border: solid 5px #00B815;
+	border-bottom: none;
+	border-radius: 10px;
+}
+
+h2 {
+	margin-top: 0px;
 }

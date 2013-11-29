@@ -4,6 +4,7 @@ from google.appengine.ext import db
 
 class Discussion(db.Model):
 	title = db.StringProperty(required=True)
+	description=db.TextProperty(required=True)
 	created = db.DateTimeProperty(auto_now_add=True)
 
 class Survey(db.Model):
@@ -28,11 +29,3 @@ class Comment(db.Model):
 	username = db.StringProperty(required=True)
 	posted = db.DateTimeProperty(auto_now_add=True)
 	message = db.TextProperty(required=True)
-	trip_id = db.IntegerProperty(required=True)
-
-
-	
-
-
-
-
