@@ -83,10 +83,11 @@ body {
 
 .page-heading {
 	text-align: center;
+	vertical-align: middle;
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: -5px;
-	width: 250px;
+	width: 300px;
     position: relative;
     background-color: #F0FFF0;
 	border: solid 5px #00B815;
@@ -161,6 +162,11 @@ body {
 	padding: 10px;
 }
 
+.shareButton
+{
+	text-align: center;
+}
+
 .error-image {
 	display: inline-block;
 	vertical-align: middle;
@@ -184,6 +190,27 @@ body {
 	border-radius: 10px;
 }
 
-h2 {
+.label {
+	vertical-align: text-top;
+}
+
+.formulaire-top h2,.formulaire h2 {
 	margin-top: 0px;
+}
+
+.hub {
+	text-align: center;
+}
+
+.formSub {
+	display: block;
+	font-size: 60%;
+}
+
+.criteria {
+	font-weight: bold;
+}
+
+.criteriaValue {
+	display: block;
 }
