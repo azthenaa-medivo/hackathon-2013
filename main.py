@@ -7,6 +7,8 @@ import error
 import joinHubForm
 import places
 import commentForm
+import surveys
+import surveyForm
 		
 app = webapp2.WSGIApplication([('/', hub.HubHandler),
 								('/_create', tripForm.TripFormHandler),
@@ -14,6 +16,8 @@ app = webapp2.WSGIApplication([('/', hub.HubHandler),
 								('/_places', places.placesHandler),
 								('/(\d+)', trip.TripHandler),
 								('/(\d+)/comment', commentForm.CommentFormHandler),
+								('/(\d+)/surveys', surveys.SurveyListHandler),
+								('/(\d+)/surveys/new', surveyForm.SurveyFormHandler),
 								
 								('/.*', error.ErrorHandler)
 								]

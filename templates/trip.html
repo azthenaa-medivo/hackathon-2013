@@ -2,9 +2,12 @@
 
 {% block menu %}
 <li>
-	<a href="/{{trip.key().id()}}/comment" title="Create a new trip !">
+	<a href="/{{trip.key().id()}}/comment" title="Comments">
 		Add a comment
 	</a>
+	<a href="/{{trip.key().id()}}/surveys" title="Polls">
+		Polls
+	</a>	
 </li>
 {% endblock %}
 

@@ -16,6 +16,12 @@ indexes:
   - name: posted
     direction: desc
 
+- kind: Survey
+  properties:
+  - name: trip_id
+  - name: posted
+    direction: desc
+
 - kind: WikiPage
   properties:
   - name: pageName
