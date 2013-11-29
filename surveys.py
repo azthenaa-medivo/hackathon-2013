@@ -3,12 +3,17 @@ import security
 import database
 import cache
 from operator import attrgetter
+from google.appengine.ext import db
 			
 class SurveyListHandler(handler.Handler):
 	def write_list(self,trip_id,username="",error_username=""):
 		trip=cache.get_trip(trip_id)
 		if trip:
 			surveys=cache.get_surveys(trip_id)
+			surveys_real=db.GqlQuery("SELECT * FROM Survey WHERE trip_id = :1 ORDER BY posted DESC",int(trip_id)).fetch(None)
+			for survey in surveys_real:
+				propositions=cache.get_propositions(trip_id,survey.key().id())
+				propositions_real=db.GqlQuery("SELECT * FROM Proposition WHERE survey_id = :1 ORDER BY posted DESC",int(trip_id)).fetch(None)
 			#surveyMax = []
 			#for survey in surveys:
 			#	bestProposition=max(survey.propositions,key=attrgetter('votes'))

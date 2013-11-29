@@ -8,14 +8,13 @@ class Discussion(db.Model):
 	created = db.DateTimeProperty(auto_now_add=True)
 
 class Survey(db.Model):
-	trip_id = db.IntegerProperty(required=True)
 	username = db.StringProperty(required=True)
 	posted = db.DateTimeProperty(auto_now_add=True)
 	question = db.TextProperty(required=True)
 	#result = db.ReferenceProperty(Proposition,required=False)
 	
 class Proposition(db.Model):
-	survey = db.ReferenceProperty(Survey,collection_name='propositions')
+	#survey = db.ReferenceProperty(Survey,collection_name='propositions')
 	numero = db.IntegerProperty(required = True)
 	text = db.TextProperty(required=True)
 	votes = db.IntegerProperty(required=True)

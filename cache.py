@@ -1,16 +1,24 @@
 ﻿import database
-
 from google.appengine.api import memcache
 from google.appengine.ext import db
 	
 def get_trip(trip_id):
-	key = trip_id
+	key = str(trip_id)
 	trip = memcache.get(key)
 	if trip is None or not trip:
 		trip = database.Discussion.get_by_id(int(trip_id))
 		if trip:
 			memcache.set(key,trip)
 	return trip
+	
+def get_survey(trip_id,survey_id):
+	keySurvey=trip_id+"surveys"
+	surveys=memcache.get(keySurvey)
+	bonSurvey=None
+	for survey in surveys:
+		if survey.key().id()==str(survey_id):
+			bonSurvey=survey
+	return bonSurvey
 
 def get_comments(trip_id):
 	key=trip_id+"comments"
@@ -33,29 +41,36 @@ def get_surveys(trip_id):
 	key=trip_id+"surveys"
 	surveys=memcache.get(key)
 	if surveys is None or not surveys:
-		surveys=db.GqlQuery("SELECT * FROM Survey WHERE trip_id = :1 ORDER BY posted DESC",trip_id).fetch(None)
+		trip=get_trip(trip_id)
+		surveys=db.GqlQuery("SELECT * FROM Survey WHERE ANCESTOR IS :1 ORDER BY posted DESC",trip.key()).fetch(None)
 		surveys=list(surveys)
 		memcache.set(key,surveys)
 	return surveys
 	
 def update_surveys(trip_id):
 	key=str(trip_id)+"surveys"
-	surveys=db.GqlQuery("SELECT * FROM Survey WHERE trip_id = :1 ORDER BY posted DESC",trip_id).fetch(None)
+	trip=get_trip(trip_id)
+	surveys=db.GqlQuery("SELECT * FROM Survey WHERE ANCESTOR IS :1 ORDER BY posted DESC",trip.key()).fetch(None)
 	surveys=list(surveys)
 	memcache.set(key,surveys)
 
-def get_proposition(trip_id,voteKey):
-	key=trip_id+"prop"+str(voteKey)
-	proposition=memcache.get(key)
-	if proposition is None or not proposition:
-		proposition = db.get(voteKey)
-		proposition=list(proposition)
-		memcache.set(key,proposition)
-	return proposition
+def get_propositions(trip_id, survey_id):
+	key=survey_id+"propositions"
+	propositions=memcache.get(key)
+	if propositions is None or not propositions:
+		survey=get_survey(trip_id,survey_id)
+		propositions=db.GqlQuery("SELECT * FROM Proposition WHERE ANCESTOR IS :1 ORDER BY numero ASC",survey.key()).fetch(None)
+		propositions=list(propositions)
+		memcache.set(key,propositions)
+	return propositions
 	
-def update_proposition(trip_id,prop):
-	key=str(trip_id)+"prop"+str(prop.key().id())
-	memcache.set(key,prop)
+def update_propositions(trip_id, survey_id):	
+	survey = get_survey(trip_id,survey_id)		
+	propositions=db.GqlQuery("SELECT * FROM Proposition WHERE ANCESTOR IS :1 ORDER BY numero ASC",survey.key()).fetch(None)
+	propositions=list(propositions)
+	
+	key=str(survey_id)+"propositions"
+	memcache.set(key,propositions)
 	
 def get_reponse(trip_id, voteKey):
 	key=trip_id+voteKey+"reponse"

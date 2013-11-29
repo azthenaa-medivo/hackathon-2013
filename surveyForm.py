@@ -30,13 +30,14 @@ class SurveyFormHandler(handler.Handler):
 				self.write_form(trip_id,user_name,question,listProp,"That's not a valid username.")
 			else:
 				
-				e = database.Survey(username=user_name,trip_id=int(trip_id),question=question)
+				trip=cache.get_trip(trip_id)
+				e = database.Survey(parent=trip, username=user_name,question=question)
 				e.put()
 				
 				for num, prop in enumerate(listProp):
-					tempProp = database.Proposition(survey=e, numero=num+1, text=prop, votes=0)
+					tempProp = database.Proposition(parent=e, numero=num+1, text=prop, votes=0)
 					tempProp.put()
-					cache.update_proposition(trip_id,tempProp)
-					
+				
 				cache.update_surveys(int(trip_id))
+				cache.update_propositions(trip_id,e.key().id())
 				self.redirect("/"+trip_id+"/surveys")
