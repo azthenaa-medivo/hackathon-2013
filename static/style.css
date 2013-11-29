@@ -141,3 +141,10 @@ body {
 	height:250px;
 	width:500px;
 }
+
+.tripDescription  {
+	padding: 10px;
+	background-color: #F0FFF0;
+	border: solid 5px #00B815;
+	border-bottom: none;
+	border-radius: 10px;
