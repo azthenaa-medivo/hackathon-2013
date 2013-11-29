@@ -55,7 +55,18 @@ class SurveyListHandler(handler.Handler):
 					propositionVotee = cache.get_proposition(trip_id,surveyID,choixVote)
 					previousReponse = cache.get_reponse(trip_id,surveyID,username)
 					
-					if not previousReponse:
+					if previousReponse:
+						logging.info("OLD")
+						previousReponse.choixProp.votes-=1
+						(previousReponse.choixProp).put()
+						propositionVotee.put()
+						cache.update_propositions(trip_id, surveyID)
+						
+						previousReponse.choixProp=propositionVotee
+						previousReponse.put()
+						cache.update_reponses(trip_id, surveyID)
+					else:
+						logging.info("NEW")
 						propositionVotee.votes+=1
 						propositionVotee.put()
 						cache.update_propositions(trip_id, surveyID)
@@ -63,14 +74,7 @@ class SurveyListHandler(handler.Handler):
 						rep = database.Reponse(parent=survey,username=user_name,choixProp=propositionVotee)				
 						rep.put()
 						cache.update_reponses(trip_id, surveyID)
-					else:
-						previousReponse.choixProp.votes-=1
-						previousReponse.choixProp.put()
-						cache.update_propositions(trip_id, surveyID)
 						
-						previousReponse.choixProp=propositionVotee
-						previousReponse.put()
-						cache.update_reponses(trip_id, surveyID)
 					break
 			
 			self.write_list(trip_id);
