@@ -1,1 +1,5 @@
 /*.pyc
+
+*.pyc
+
+/oauth2/*.pyc
