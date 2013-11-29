@@ -114,6 +114,7 @@ body {
 	color: #378000;
 	font-size: 150%;
 	text-decoration: none;
+
 }:not(.comment:last-child)
 
 
@@ -255,10 +256,17 @@ body {
 }
 
 .criteriaValue {
-	display: block
+	display: block;
+	margin-bottom: 5px;
 }
 
-
+.googlemap {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
 
 .backUp {
   position: fixed;
@@ -341,4 +349,13 @@ body {
 {
 	background-color: #FF4444;
 	text-align: center;
+}
+
+.titlePlace
+{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-decoration: none;
+	color: #378000;
+	font-size: 150%;
 }

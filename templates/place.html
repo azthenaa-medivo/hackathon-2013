@@ -7,14 +7,16 @@
 			Place
 		</h2>
 	</div>
-	<p>
+	<section id="main" class="formulaire">
+		<div class="hub">
 		{% if error %}
 		<p>{{error}}<p>
 		{% else %}
 		<div class="place">
-			<span class="criteria">
-				<h2><a href='{{place.link}}'> {{place.heading}} </a></h2>
-			</span><span class="criteriaValue">
+			<div class="criteria titlePlace">
+					<a href='{{place.link}}'> {{place.heading}} </a>
+			</div>
+			<span class="criteriaValue">
 			<span class="criteria">
 				<div class="flexslider">
 					<ul class="slides">
@@ -27,33 +29,53 @@
 				</div>
 			</span>
 			<span class="criteria">Location :</span><span class="criteriaValue">{{place.origin}} </span>
-			<span class="criteria">Minimum stay nights :</span><span class="criteriaValue">{{place.minimum_stay_night}} </span>
-			<span class="criteria">Per person :</span><span class="criteriaValue">{{place.price_per}} </span>
-			<span class="criteria">Number of beds :</span><span class="criteriaValue">{{place.bed_count}} </span>
-			<span class="criteria">Occupancy :</span><span class="criteriaValue">{{place.occupancy}} </span>
-			<span class="criteria">Provider :</span><span class="criteriaValue">{{place.provider}} </span>
+			{% if place.description != "" %}
 			<span class="criteria">Description :</span><span class="criteriaValue"> {{place.description}} </span>
-			<span class="criteria">PID :</span><span class="criteriaValue"> {{place.pid}} </span>
-			<span class="criteria">Price :</span><span class="criteriaValue"> {{place.price}} </span>
-			<span class="criteria">Link :</span><span class="criteriaValue"> </span>
+			{% endif %}
+			{% if place.price > 0 %}
+			<span class="criteria">Price :</span><span class="criteriaValue"> ${{place.price}} </span>
+			{% endif %}
+			{% if place.minimum_stay_night > 0 %}
+			<span class="criteria">Minimum stay nights :</span><span class="criteriaValue">{{place.minimum_stay_night}} </span>
+			{% endif %}
+			{% if place.price_per > 0 %}
+			<span class="criteria">Per person :</span><span class="criteriaValue">{{place.price_per}} </span>
+			{% endif %}
+			{% if place.bed_count > 0 %}
+			<span class="criteria">Number of beds :</span><span class="criteriaValue">{{place.bed_count}} </span>
+			{% endif %}
+			{% if place.occupancy > 0 %}
+			<span class="criteria">Occupancy :</span><span class="criteriaValue">{{place.occupancy}} </span>
+			{% endif %}
+			{% if place.provider != "" %}
+			<span class="criteria">Provider :</span><span class="criteriaValue">{{place.provider}} </span>
+			{% endif %}
+			{% if place.country != "" %}
 			<span class="criteria">Country :</span><span class="criteriaValue"> {{place.country}} </span>
-			<span class="criteria">NID :</span><span class="criteriaValue"> {{place.nid}} </span>
-			<span class="criteria">bathroomCount :</span><span class="criteriaValue"> {{place.bathroomcount}} </span>
-			<span class="criteria">bedroomCount :</span><span class="criteriaValue"> {{place.bedroomcount}} </span>
-			<span class="criteria">room type :</span><span class="criteriaValue"> {{place.room_type}} ({{place.room_type_alias}}) </span>
-			<span class="criteria">prop type :</span><span class="criteriaValue"> {{place.prop_type}} ({{place.prop_type_alias}}) </span>
-			<span class="criteria">position :</span><span class="criteriaValue"> {{place.latitude}} :: {{place.longitude}} </span>
-			<span class="criteria">unavailable :</span><span class="criteriaValue"> </span>
-			{% for item in place.unavailable %}
-			- {{item}} <br>
-			{% endfor %}
-			amenities :  <br>
+			{% endif %}
+			{% if place.bathroomcount > 0 %}
+			<span class="criteria">Bathrooms :</span><span class="criteriaValue"> {{place.bathroomcount}} </span>
+			{% endif %}
+			{% if place.bedroomcount > 0 %}
+			<span class="criteria">Bedrooms :</span><span class="criteriaValue"> {{place.bedroomcount}} </span>
+			{% endif %}
+			{% if place.room_type_alias != "" %}
+			<span class="criteria">Room type :</span><span class="criteriaValue"> {{place.room_type_alias}} </span>
+			{% endif %}
+			{% if place.prop_type_alias != "" %}
+			<span class="criteria">Prop type :</span><span class="criteriaValue"> {{place.prop_type_alias}} </span>
+			{% endif %}
+			{% if place.latitude and place.longitude %}
+			<span class="criteria">Position :</span><span class="criteriaValue"> {{place.latitude}} :: {{place.longitude}}	<img class="googlemap" src="http://maps.googleapis.com/maps/api/staticmap?size=380x263&sensor=false&markers={{place.latitude}},{{place.longitude}}"> </span>
+
+			{% endif %}
+			<span class="criteria">Commodités :</span><span class="criteriaValue">
 			{% for item in place.amenities %}
 			- {{item}} <br>
-			{% endfor %}
-			photos :  <br>
+			{% endfor %}</span>
 		</div>
-		<p>
 			{% endif %}
+		</div>
+		</section>
 		</section>
 		{% endblock %}
