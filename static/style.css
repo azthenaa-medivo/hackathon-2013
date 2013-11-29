@@ -194,10 +194,15 @@ body {
 	vertical-align: text-top;
 }
 
-.formulaire-top h2 {
+.formulaire-top h2,.formulaire h2 {
 	margin-top: 0px;
 }
 
 .hub {
 	text-align: center;
+}
+
+.formSub {
+	display: block;
+	font-size: 60%;
 }
