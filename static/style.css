@@ -1,14 +1,12 @@
 body {
-    position: relative;
+	position: relative;
     font-family: Verdana, Arial, sans-serif;
     font-size: 14px;
-    width: 800px;
+    width: 900px;
     margin: 0 auto;
     padding: 10px;
     color: #000;
 	background-image: url("background.jpg");
-	background-repeat:repeat-y,repeat-y, repeat-x;
-	background-position: left top, right top,left top;
 }
 
 .top-page {
@@ -31,7 +29,7 @@ body {
 
 .top-image {
 	display: inline-block;
-	vertical-align: middle;w
+	vertical-align: middle;
 }
 
 .top-a {
@@ -44,6 +42,7 @@ body {
 }
 
 #nav{
+	width: 100%;
     position:relative;
 	top:48px;
     text-align:center;
@@ -93,7 +92,6 @@ body {
 	border: solid 5px #00B815;
 	border-radius: 10px;
 	padding: 5px;
-    /*border-bottom: 3px solid #008B8B;*/
 }
 
 .tripform-section {
@@ -124,19 +122,11 @@ body {
 }
 
 .comment {
-
-}
-
-.single-comment {
 	border-bottom: solid 1px #378000;
-	padding: 20px;
+	padding: 10px;
 }
 
-.single-comment:hover {
-	background-color: white;
-}
-
-.single-comment:last-child {
+.comment:last-child {
 	border-bottom: solid 0px #FF0000;
 }
 
@@ -150,7 +140,7 @@ body {
 
 .commentUserName {
 	width: 300px;
-	border-bottom: solid 1px #378000;
+	border-bottom: solid 1px black;
 }
 
 .commentPosted {
@@ -220,7 +210,6 @@ body {
 }
 
 .criteriaValue {
-<<<<<<< HEAD
 	display: block
 }
 
@@ -272,25 +261,3 @@ body {
 	top:1px;
 }
 
-=======
-	display: block;
-}
-
-.backUp {
-	position: fixed;
-}
-
-.imageBU {
-	cursor: pointer;
-	bottom: 0px;
-	right: 0px;
-}
-
-.textBU {
-	text-align: right;
-	color: darkred;
-	cursor: default;
-	bottom: 10px;
-	right: 0px;
-}
->>>>>>> ccdbe37c78e42fcba097bbdb6c01696dd0b76f95
