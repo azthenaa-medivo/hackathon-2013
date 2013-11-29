@@ -16,11 +16,14 @@ class placesHandler(handler.Handler):
 			self.render_id(self.request.get('id'))
 		elif self.request.get('city'):
 			self.render_city(self.request.get('city'))
-		elif self.request.get('sort'):
-			self.render_sort(self.request.get('sort'))
+		elif self.request.get('page'):
+			self.render_page(self.request.get('page'))
 		else:
 			self.render_all()
-			
+		
+	def post(self):
+		if self.request.get('citySearch'):
+			self.render_city(self.request.get('citySearch'))
 
 
 	def render_all(self):
@@ -32,7 +35,7 @@ class placesHandler(handler.Handler):
 		self.render("places_list.html", places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
 
 	def render_city(self, city):
-		url = self.url_places + "?city=" + city
+		url = self.url_places + "?city=" + city.replace(' ', '+').replace('	', '+')
 		plain = self.process(self.url_places)
 		jSon = json.loads(plain)
 		places_list = []
@@ -40,18 +43,41 @@ class placesHandler(handler.Handler):
 			places_list.append(self.jSonToPlace(item))
 		self.render("places_list.html", city=city, places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
 
-	def render_sort(self, sort):
-		if self.request.get('sortMethod'):
-			sortMethod = self.request.get('sortMethod')
-		else:
-			sortMethod = 'ascending'
-		url = self.url_places + "?sort=" + sort + "?sortMethod=" + sortMethod
+	def render_page(self, page_s):
+		page = int(page_s)
+
+		url = self.url_places + "?page=" + str(page)
 		plain = self.process(self.url_places)
 		jSon = json.loads(plain)
 		places_list = []
 		for item in jSon["items"]:
 			places_list.append(self.jSonToPlace(item))
-		self.render("places_list.html", sort=sort, places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
+
+		maxPage = jSon["totalPages"]
+		page_links = ""
+
+		if page > 1:
+			page_links += " <a href='/_places?page=1' >1</a> "
+		if page > 3:
+			page_links += " <a href='/_places?page="+ str(page-2) +"' >"+ str(page-2) +"</a> "
+		if page > 2:
+			page_links += " <a href='/_places?page="+ str(page-1) +"' >"+ str(page-1) +"</a> "
+		page_links += " " + str(page) + " "
+		if page < (maxPage - 1) :
+			page_links += " <a href='/_places?page="+ str(page+1) +"' >"+ str(page+1) +"</a> "
+		if page < (maxPage - 2) :
+			page_links += " <a href='/_places?page="+ str(page+2) +"' >"+ str(page+2) +"</a> "
+		if page < (maxPage - 3) :
+			page_links += " <a href='/_places?page="+ str(page+3) +"' >"+ str(page+3) +"</a> "
+		if page < (maxPage - 10) :
+			page_links += " <a href='/_places?page="+ str(page+10) +"' >"+ str(page+10) +"</a> "
+		if page < (maxPage - 20) :
+			page_links += " <a href='/_places?page="+ str(page+20) +"' >"+ str(page+20) +"</a> "
+		if page < (maxPage - 50) :
+			page_links += " <a href='/_places?page="+ str(page+50) +"' >"+ str(page+50) +"</a> "
+		page_links += " ... <a href='/_places?page="+ str(maxPage) +"' >"+ str(maxPage) +"</a> "
+		
+		self.render("places_list.html", pageLinks=page_links, places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
 
 
 	def render_id(self, place_id):
@@ -128,7 +154,4 @@ class place:
 	unavailable=[]
 	amenities=[]
 	photos=[]
-	
-
-
 
