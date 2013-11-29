@@ -23,7 +23,7 @@
 				{{trip.created.strftime("%c")}}
 			</div>
 		</div>
-		<section class="tripDescription">
+		<section class="tripDescription formulaire-top">
 			<div>
 				<h2>
 					Description
@@ -31,31 +31,36 @@
 			</div>
 			<div>{{trip.description}}</div>
 		</section>
-		<section class="formulaire">
+		<section class="formulaire-top">
+				<h2>
+					Comments
+				</h2>
 			{% if comments %}
 				<div>
-					<h2>
-						Comments
-					</h2>
+
 				</div>
 				<div class="comments">
+					<table class="comments-table">
 					{% for comment in comments %}
-						<div class="comment">
-							<div class="commentUserName">
+						<tr class="comment">
+							<td class="commentUserName">
 								{{ comment.username }}
-							</div>
-							<div class="commentPosted">
+							</td>
+							<td class="commentPosted">
 								{{ comment.posted.strftime("%c") }}
-							</div>
-							<div class="commentMessage">
-								{{ comment.message }}
-							</div>
+							</td>
+						</tr>
+					</table>
+						<div class="commentMessage">
+							{{ comment.message }}
 						</div>
 					{% endfor %}
 				</div>
+			{% else %}
+				<span class="no-comment">No comment~</span>
 			{% endif %}
 		</section>
-		<div class="commentForm">
+		<div class="commentForm formulaire">
 			
 		<section id="main" class="commentFormulaire">
 			<div>
@@ -65,32 +70,30 @@
 			</div>
 			<div class="comment-form">
 				<form method="post">
-					<table>
-						<tr>
-							<td class="label">
-									Username
-							</td>
-							<td>
-								<input type="text" name="username" value="{{ username }}" required>
-							</td>
-							<td class="error">
-								{{ error_username }}
-							</td>
-						</tr>
-						<tr>
-							<td class="label">
-								Message
-							</td>
-							<td>
-								<textarea name="message" required>{{ message }}</textarea>
-							</td>
-						</tr>
-					</table>
-					<div style="text-align:center">
-						<input type="submit" value="submit">
-					</div>
-				</form>
-			</div>
+				<table>
+					<tr>
+						<td class="label">
+							Username
+						</td>
+						<td>
+							<input type="text" name="username" value="{{ username }}" required>
+						</td>
+						<td class="error">
+							{{ error_username }}
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							Message
+						</td>
+						<td >
+							<textarea name="message" class="b" required>{{ message }}</textarea>
+						</td>
+					</tr>
+				</table>
+				<input class="submitButton" type="submit" value="Submit">
+			</form>
+		</div>
 		</section>
 	</div>
 {% endblock %}
