@@ -247,6 +247,7 @@ body {
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #aade7c;
+	cursor: pointer;
 }
 
 .newSearchButton :hover {
@@ -260,4 +261,3 @@ body {
 	position:relative;
 	top:1px;
 }
-
