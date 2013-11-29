@@ -10,7 +10,7 @@
 	<section id="main" class="formulaire">
 		<div class="hub">
 			<p>Total results : {{total_results}}</p>
-			<p>Page : {{page}}/{{total_pages}}</p>
+			<p>{{pageLinks | safe}} 	{{page}}/{{total_pages}}</p>
 			<section id="search">
 				<form method="post">
 					<label>
@@ -24,15 +24,16 @@
 				{% for place in places_list %}
 				<div class="place">
 					<span class="criteriaValue">
-						<a href='{{place.link}}'> {{place.heading}} </a>
+						<a href='{{place.link}}'> {{place.heading | safe}} </a>
 					</span>
-					<span class="criteria">Location :</span><span class="criteriaValue">{{place.origin}} </span>
-					<span class="criteria">Description :</span><span class="criteriaValue"> {{place.description}} </span>
-					<span class="criteria">Person/Night :</span><span class="criteriaValue"> ${{place.price}}</span>
+					<span class="criteria">Location :</span><span class="criteriaValue">{{place.origin | safe}} </span>
+					<span class="criteria">Description :</span><span class="criteriaValue"> {{place.description | safe}} </span>
+					<span class="criteria">Person/Night :</span><span class="criteriaValue"> ${{place.price | safe}}</span>
 				</div>
 				<hr class="lastHR">
 				{% endfor %}
 				<div class="endMessage">That's all for to-day people !</div>
+				<p>{{pageLinks | safe}}</p>
 			</section>
 		</div>
 	</section>
