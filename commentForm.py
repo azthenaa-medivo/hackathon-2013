@@ -26,6 +26,7 @@ class CommentFormHandler(handler.Handler):
 		if not username :
 			self.write_form(trip_id,user_name,message,"That's not a valid username.")
 		else:
-			e = database.Comment(username=user_name,trip_id=int(trip_id),message=message).put()
+			trip=cache.get_trip(trip_id)
+			e = database.Comment(parent=trip,username=user_name,trip_id=int(trip_id),message=message).put()
 			cache.update_comments(trip_id)
 			self.redirect("/"+trip_id)

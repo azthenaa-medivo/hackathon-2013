@@ -25,11 +25,3 @@ class Comment(db.Model):
 	username = db.StringProperty(required=True)
 	posted = db.DateTimeProperty(auto_now_add=True)
 	message = db.TextProperty(required=True)
-	trip_id = db.IntegerProperty(required=True)
-
-
-	
-
-
-
-
