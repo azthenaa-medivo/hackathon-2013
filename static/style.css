@@ -206,3 +206,11 @@ body {
 	display: block;
 	font-size: 60%;
 }
+
+.criteria {
+	font-weight: bold;
+}
+
+.criteriaValue {
+	display: block;
+}
