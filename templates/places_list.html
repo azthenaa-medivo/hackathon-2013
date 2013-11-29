@@ -11,56 +11,30 @@
 		<div class="hub">
 			<p>Total results : {{total_results}}</p>
 			<p>Page : {{page}}/{{total_pages}}</p>
-			<p>{{pageLinks | safe}}</p>
-				<section class="places">
+			<section id="search">
+				<form method="post">
+					<label>
+						Search for a city :
+						<input type="text" name="citySearch">
+					</label>
+				</form>
+			</section>
+			<hr>
+			<section class="places">
 				{% for place in places_list %}
 				<div class="place">
-					<span class="criteria">
-						<h2><a href='{{place.link}}'> {{place.heading}} </a></h2>
-					</span><span class="criteriaValue">
-					<span class="criteria">
-						<div class="flexslider">
-							<ul class="slides">
-								{% for item in place.photos %}
-								<li>
-									<img src='{{item}}' />
-								</li>
-								{% endfor %}
-							</ul>
-						</div>
+					<span class="criteriaValue">
+						<a href='{{place.link}}'> {{place.heading}} </a>
 					</span>
 					<span class="criteria">Location :</span><span class="criteriaValue">{{place.origin}} </span>
-					<span class="criteria">Minimum stay nights :</span><span class="criteriaValue">{{place.minimum_stay_night}} </span>
-					<span class="criteria">Per person :</span><span class="criteriaValue">{{place.price_per}} </span>
-					<span class="criteria">Number of beds :</span><span class="criteriaValue">{{place.bed_count}} </span>
-					<span class="criteria">Occupancy :</span><span class="criteriaValue">{{place.occupancy}} </span>
-					<span class="criteria">Provider :</span><span class="criteriaValue">{{place.provider}} </span>
-					<span class="criteria">Description :</span><span class="criteriaValue"> {{place.description | safe}} </span>
-					<span class="criteria">PID :</span><span class="criteriaValue"> {{place.pid}} </span>
-					<span class="criteria">Price :</span><span class="criteriaValue"> {{place.price}} </span>
-					<span class="criteria">Link :</span><span class="criteriaValue"> </span>
-					<span class="criteria">Country :</span><span class="criteriaValue"> {{place.country}} </span>
-					<span class="criteria">NID :</span><span class="criteriaValue"> {{place.nid}} </span>
-					<span class="criteria">bathroomCount :</span><span class="criteriaValue"> {{place.bathroomcount}} </span>
-					<span class="criteria">bedroomCount :</span><span class="criteriaValue"> {{place.bedroomcount}} </span>
-					<span class="criteria">room type :</span><span class="criteriaValue"> {{place.room_type}} ({{place.room_type_alias}}) </span>
-					<span class="criteria">prop type :</span><span class="criteriaValue"> {{place.prop_type}} ({{place.prop_type_alias}}) </span>
-					<span class="criteria">position :</span><span class="criteriaValue"> {{place.latitude}} :: {{place.longitude}} </span>
-					<span class="criteria">unavailable :</span><span class="criteriaValue"> </span>
-					{% for item in place.unavailable %}
-					- {{item}} <br>
-					{% endfor %}
-					amenities :  <br>
-					{% for item in place.amenities %}
-					- {{item}} <br>
-					{% endfor %}
-					photos :  <br>
+					<span class="criteria">Description :</span><span class="criteriaValue"> {{place.description}} </span>
+					<span class="criteria">Person/Night :</span><span class="criteriaValue"> ${{place.price}}</span>
 				</div>
 				<hr class="lastHR">
-					{% endfor %}
+				{% endfor %}
 				<div class="endMessage">That's all for to-day people !</div>
-				</section>
-			</div>
-		</section>
+			</section>
+		</div>
 	</section>
-	{% endblock %}
+</section>
+{% endblock %}
