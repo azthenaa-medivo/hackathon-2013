@@ -39,5 +39,5 @@ class SurveyFormHandler(handler.Handler):
 					tempProp.put()
 				
 				cache.update_surveys(int(trip_id))
-				cache.update_propositions(trip_id,e.key().id())
+				#cache.update_propositions(trip_id,e.key().id())
 				self.redirect("/"+trip_id+"/surveys")

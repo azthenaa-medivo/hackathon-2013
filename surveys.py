@@ -17,6 +17,8 @@ class SurveyListHandler(handler.Handler):
 			for survey in surveys:
 				propositions=cache.get_propositions(trip_id,survey.key().id())
 				surveyProp.append(propositions)
+			
+			
 			#surveyMax = []
 			#for survey in surveys:
 			#	bestProposition=max(survey.propositions,key=attrgetter('votes'))
@@ -25,8 +27,9 @@ class SurveyListHandler(handler.Handler):
 			#	else :
 			#		surveyMax.append(survey.propositions[0])
 			#surveysPlusMax=zip(surveys,surveyMax)
+			
+			
 			surveysPlusProp = zip(surveys,surveyProp)
-			logging.info(surveys.question)
 			self.render("surveys.html", trip=trip, surveysPlusProp=surveysPlusProp, username=username, error_username=error_username)
 		else:
 			self.redirect("/error")

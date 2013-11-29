@@ -27,7 +27,7 @@ class TripHandler(handler.Handler):
 		error_username=""
         
 		if not username :
-			self.write_form(trip_id,user_name,message,"That's not a valid username.")
+			self.render_trip(trip_id,user_name,message,"That's not a valid username.")
 		else:
 			trip=cache.get_trip(trip_id)
 			e = database.Comment(parent=trip,username=user_name,trip_id=int(trip_id),message=message).put()

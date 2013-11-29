@@ -1,4 +1,5 @@
 ﻿import database
+import logging
 from google.appengine.api import memcache
 from google.appengine.ext import db
 	
@@ -41,13 +42,13 @@ def update_comments(trip_id):
 	memcache.set(key,comments)
 	
 def get_surveys(trip_id):
-	key=trip_id+"surveys"
+	key=str(trip_id)+"surveys"
 	surveys=memcache.get(key)
 	if surveys is None or not surveys:
 		trip=get_trip(trip_id)
 		surveys=db.GqlQuery("SELECT * FROM Survey WHERE ANCESTOR IS :1 ORDER BY posted DESC",trip.key()).fetch(None)
 		surveys=list(surveys)
-		memcache.set(key,surveys)
+		memcache.set(key,surveys)		
 	return surveys
 	
 def update_surveys(trip_id):
@@ -62,9 +63,10 @@ def get_propositions(trip_id, survey_id):
 	propositions=memcache.get(key)
 	if propositions is None or not propositions:
 		survey=get_survey(trip_id,survey_id)
-		propositions=db.GqlQuery("SELECT * FROM Proposition WHERE ANCESTOR IS :1 ORDER BY numero ASC",survey.key()).fetch(None)
-		propositions=list(propositions)
-		memcache.set(key,propositions)
+		if survey:
+			propositions=db.GqlQuery("SELECT * FROM Proposition WHERE ANCESTOR IS :1 ORDER BY numero ASC",survey.key()).fetch(None)
+			propositions=list(propositions)
+			memcache.set(key,propositions)
 	return propositions
 	
 def update_propositions(trip_id, survey_id):	
