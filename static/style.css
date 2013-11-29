@@ -120,12 +120,11 @@ body {
 
 .comment {
 	border-bottom: solid 1px #378000;
-	border-bottom-width: 50%;
 	padding: 10px;
 }
 
 .comment:last-child {
-	border-bottom: solid 2px #FF0000;
+	border-bottom: solid 0px #FF0000;
 }
 
 .error-image {
