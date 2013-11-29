@@ -83,10 +83,11 @@ body {
 
 .page-heading {
 	text-align: center;
+	vertical-align: middle;
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: -5px;
-	width: 250px;
+	width: 300px;
     position: relative;
     background-color: #F0FFF0;
 	border: solid 5px #00B815;
@@ -193,7 +194,7 @@ body {
 	vertical-align: text-top;
 }
 
-h2 {
+.formulaire-top h2 {
 	margin-top: 0px;
 }
 
