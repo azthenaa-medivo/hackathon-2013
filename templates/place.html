@@ -8,6 +8,9 @@
 		</h2>
 	</div>
 	<p>
+		{% if error %}
+		<p>{{error}}<p>
+		{% else %}
 		<div class="place">
 			<span class="criteria">
 				<h2><a href='{{place.link}}'> {{place.heading}} </a></h2>
