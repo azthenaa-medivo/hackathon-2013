@@ -220,7 +220,6 @@ body {
 }
 
 .criteriaValue {
-<<<<<<< HEAD
 	display: block
 }
 
@@ -272,10 +271,6 @@ body {
 	top:1px;
 }
 
-=======
-	display: block;
-}
-
 .backUp {
 	position: fixed;
 }
@@ -293,4 +288,3 @@ body {
 	bottom: 10px;
 	right: 0px;
 }
->>>>>>> ccdbe37c78e42fcba097bbdb6c01696dd0b76f95
