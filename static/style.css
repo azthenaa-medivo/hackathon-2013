@@ -326,3 +326,19 @@ body {
 	position:relative;
 	top:1px;
 }
+
+.oddBusiness
+{
+	background-color: #00FFA6; /* YOLO */
+}
+
+.evenBusiness
+{
+	background-color: #BAED00;
+}
+
+.res-table-titles
+{
+	background-color: #FF4444;
+	text-align: center;
+}
