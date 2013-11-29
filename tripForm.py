@@ -8,9 +8,10 @@ import emailUtility
 
 class TripFormHandler(handler.Handler):
 
-	def write_form(self, user_name="", trip_name="", trip_description="", error_username="", error_email="", error_tripname=""):
+	def write_form(self, user_name="", email="", trip_name="", trip_description="", error_username="", error_email="", error_tripname=""):
 		self.render("tripForm.html",
 		user_name=user_name,
+		email=email,
 		trip_name=trip_name,
 		trip_description=trip_description,
 		error_username=error_username,
@@ -46,7 +47,7 @@ class TripFormHandler(handler.Handler):
 			error_email = "That's not a valid email."
 			
 		if error_username or error_email or error_tripname:
-			self.write_form( user_name, trip_name, trip_description, error_username, error_email, error_tripname)
+			self.write_form( user_name, email, trip_name, trip_description, error_username, error_email, error_tripname)
 		else:
 			e = database.Discussion(title=trip_name,description=trip_description,user_name=user_name)
 			e.put()
