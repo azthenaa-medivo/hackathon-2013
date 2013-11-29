@@ -45,6 +45,11 @@ indexes:
   - name: posted
     direction: desc
 
+- kind: Reponse
+  ancestor: yes
+  properties:
+  - name: username
+
 - kind: Survey
   properties:
   - name: trip_id

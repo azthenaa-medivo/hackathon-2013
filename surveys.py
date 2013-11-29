@@ -46,27 +46,31 @@ class SurveyListHandler(handler.Handler):
 		if not username :
 			self.write_form(trip_id,user_name,message,"That's not a valid username.")
 		else:
-			#surveys=self.request.get('surveys')
 			surveys=cache.get_surveys(trip_id)
 			for survey in surveys:
-				propButton = self.request.get('vote'+str(survey.key().id()))
+				surveyID=survey.key().id()
+				propButton = self.request.get('vote'+str(surveyID))
 				if propButton:
-					voteKey = self.request.get('group'+str(survey.key().id()))
-					propositionVotee = cache.get_proposition(trip_id, voteKey)
-					previousReponse = cache.get_reponse(trip_id, voteKey)
+					choixVote = self.request.get('group'+str(surveyID))
+					propositionVotee = cache.get_proposition(trip_id,surveyID,choixVote)
+					previousReponse = cache.get_reponse(trip_id,surveyID,username)
 					
-					if(previousReponse.count()==0):
+					if not previousReponse:
 						propositionVotee.votes+=1
 						propositionVotee.put()
-						cache.update_proposition(trip_id, voteKey)
+						cache.update_propositions(trip_id, surveyID)
 						
-						rep = database.Reponse(survey=survey,username=user_name,choixProp=propositionVotee)				
+						rep = database.Reponse(parent=survey,username=user_name,choixProp=propositionVotee)				
 						rep.put()
-						cache.update_reponse(trip_id, voteKey)
-					elif(previousReponse.count()==1):
-						previousReponse[0].choixProp=propositionVotee
-						previousReponse[0].put()
-						cache.update_reponse(trip_id, voteKey)
+						cache.update_reponses(trip_id, surveyID)
+					else:
+						previousReponse.choixProp.votes-=1
+						previousReponse.choixProp.put()
+						cache.update_propositions(trip_id, surveyID)
+						
+						previousReponse.choixProp=propositionVotee
+						previousReponse.put()
+						cache.update_reponses(trip_id, surveyID)
 					break
-
+			
 			self.write_list(trip_id);

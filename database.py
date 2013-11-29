@@ -14,13 +14,11 @@ class Survey(db.Model):
 	#result = db.ReferenceProperty(Proposition,required=False)
 	
 class Proposition(db.Model):
-	#survey = db.ReferenceProperty(Survey,collection_name='propositions')
 	numero = db.IntegerProperty(required = True)
 	text = db.TextProperty(required=True)
 	votes = db.IntegerProperty(required=True)
 	
 class Reponse(db.Model):
-	survey = db.ReferenceProperty(Survey,required=True)
 	username = db.StringProperty(required=True)
 	choixProp = db.ReferenceProperty(Proposition, required=True) 
 	
