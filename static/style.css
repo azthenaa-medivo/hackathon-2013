@@ -183,3 +183,7 @@ body {
 	border-bottom: none;
 	border-radius: 10px;
 }
+
+h2 {
+	margin-top: 0px;
+}
