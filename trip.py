@@ -11,7 +11,7 @@ class TripHandler(handler.Handler):
 		trip = cache.get_trip(trip_id)
 		if trip is not None:
 			comments=cache.get_comments(trip_id)
-			self.render("trip.html",trip=trip,comments=comments, comment_username=comment_username, comment_message=comment_message, error_username=error_username)
+			self.render("trip.html",trip=trip,comments=comments, username=comment_username, message=comment_message, error_username=error_username)
 		else:
 			self.redirect("/error")
 

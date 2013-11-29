@@ -124,11 +124,19 @@ body {
 }
 
 .comment {
-	border-bottom: solid 1px #378000;
-	padding: 10px;
+
 }
 
-.comment:last-child {
+.single-comment {
+	border-bottom: solid 1px #378000;
+	padding: 20px;
+}
+
+.single-comment:hover {
+	background-color: white;
+}
+
+.single-comment:last-child {
 	border-bottom: solid 0px #FF0000;
 }
 
@@ -142,7 +150,7 @@ body {
 
 .commentUserName {
 	width: 300px;
-	border-bottom: solid 1px black;
+	border-bottom: solid 1px #378000;
 }
 
 .commentPosted {
@@ -213,4 +221,22 @@ body {
 
 .criteriaValue {
 	display: block;
+}
+
+.backUp {
+	position: fixed;
+}
+
+.imageBU {
+	cursor: pointer;
+	bottom: 0px;
+	right: 0px;
+}
+
+.textBU {
+	text-align: right;
+	color: darkred;
+	cursor: default;
+	bottom: 10px;
+	right: 0px;
 }
