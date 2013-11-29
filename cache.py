@@ -14,6 +14,9 @@ def get_trip(trip_id):
 def get_survey(trip_id,survey_id):
 	keySurvey=trip_id+"surveys"
 	surveys=memcache.get(keySurvey)
+	if surveys is None or not surveys:
+		surveys=get_surveys(trip_id)
+		
 	bonSurvey=None
 	for survey in surveys:
 		if survey.key().id()==str(survey_id):
@@ -55,7 +58,7 @@ def update_surveys(trip_id):
 	memcache.set(key,surveys)
 
 def get_propositions(trip_id, survey_id):
-	key=survey_id+"propositions"
+	key=str(survey_id)+"propositions"
 	propositions=memcache.get(key)
 	if propositions is None or not propositions:
 		survey=get_survey(trip_id,survey_id)

@@ -4,16 +4,19 @@ import database
 import cache
 from operator import attrgetter
 from google.appengine.ext import db
+
+import logging
 			
 class SurveyListHandler(handler.Handler):
 	def write_list(self,trip_id,username="",error_username=""):
 		trip=cache.get_trip(trip_id)
 		if trip:
 			surveys=cache.get_surveys(trip_id)
-			surveys_real=db.GqlQuery("SELECT * FROM Survey WHERE trip_id = :1 ORDER BY posted DESC",int(trip_id)).fetch(None)
-			for survey in surveys_real:
+			
+			surveyProp=[]
+			for survey in surveys:
 				propositions=cache.get_propositions(trip_id,survey.key().id())
-				propositions_real=db.GqlQuery("SELECT * FROM Proposition WHERE survey_id = :1 ORDER BY posted DESC",int(trip_id)).fetch(None)
+				surveyProp.append(propositions)
 			#surveyMax = []
 			#for survey in surveys:
 			#	bestProposition=max(survey.propositions,key=attrgetter('votes'))
@@ -22,7 +25,9 @@ class SurveyListHandler(handler.Handler):
 			#	else :
 			#		surveyMax.append(survey.propositions[0])
 			#surveysPlusMax=zip(surveys,surveyMax)
-			self.render("surveys.html", trip=trip, surveys=surveys, username=username, error_username=error_username)
+			surveysPlusProp = zip(surveys,surveyProp)
+			logging.info(surveys.question)
+			self.render("surveys.html", trip=trip, surveysPlusProp=surveysPlusProp, username=username, error_username=error_username)
 		else:
 			self.redirect("/error")
 

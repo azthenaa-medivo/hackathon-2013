@@ -9,6 +9,7 @@ import places
 import surveys
 import surveyForm
 import shareTrip
+import yelpAPI
 		
 app = webapp2.WSGIApplication([('/', hub.HubHandler),
 								('/_create', tripForm.TripFormHandler),
@@ -18,6 +19,7 @@ app = webapp2.WSGIApplication([('/', hub.HubHandler),
 								('/(\d+)/surveys', surveys.SurveyListHandler),
 								('/(\d+)/surveys/new', surveyForm.SurveyFormHandler),
 								('/(\d+)/share', shareTrip.ShareTripHandler),
+								('/_yelp',yelpAPI.YelpAPIHandler),
 
 								('/.*', error.ErrorHandler)
 								]

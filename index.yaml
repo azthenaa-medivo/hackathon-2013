@@ -29,6 +29,12 @@ indexes:
     direction: desc
 
 - kind: Proposition
+  properties:
+  - name: survey_id
+  - name: posted
+    direction: desc
+
+- kind: Proposition
   ancestor: yes
   properties:
   - name: numero
