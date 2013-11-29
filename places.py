@@ -16,11 +16,14 @@ class placesHandler(handler.Handler):
 			self.render_id(self.request.get('id'))
 		elif self.request.get('city'):
 			self.render_city(self.request.get('city'))
-		elif self.request.get('sort'):
-			self.render_sort(self.request.get('sort'))
+		elif self.request.get('page'):
+			self.render_page(self.request.get('page'))
 		else:
 			self.render_all()
-			
+		
+	def post(self):
+		if self.request.get('citySearch'):
+			self.render_city(self.request.get('citySearch'))
 
 
 	def render_all(self):
@@ -32,7 +35,7 @@ class placesHandler(handler.Handler):
 		self.render("places_list.html", places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
 
 	def render_city(self, city):
-		url = self.url_places + "?city=" + city
+		url = self.url_places + "?city=" + city.replace(' ', '+').replace('	', '+')
 		plain = self.process(self.url_places)
 		jSon = json.loads(plain)
 		places_list = []
@@ -40,18 +43,41 @@ class placesHandler(handler.Handler):
 			places_list.append(self.jSonToPlace(item))
 		self.render("places_list.html", city=city, places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
 
-	def render_sort(self, sort):
-		if self.request.get('sortMethod'):
-			sortMethod = self.request.get('sortMethod')
-		else:
-			sortMethod = 'ascending'
-		url = self.url_places + "?sort=" + sort + "?sortMethod=" + sortMethod
-		plain = self.process(self.url_places)
+	def render_page(self, page_s):
+		page = int(page_s)
+
+		url = self.url_places + "?page=" + str(page)
+		plain = self.process(url)
 		jSon = json.loads(plain)
 		places_list = []
 		for item in jSon["items"]:
 			places_list.append(self.jSonToPlace(item))
-		self.render("places_list.html", sort=sort, places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
+
+		maxPage = int(jSon["totalPages"])
+		page_links = ""
+
+		if page > 1:
+			page_links += " <a href='/_places?page=1' >1</a> "
+		if page > 3:
+			page_links += " ... <a href='/_places?page="+ str(page-2) +"' >"+ str(page-2) +"</a> "
+		if page > 2:
+			page_links += " <a href='/_places?page="+ str(page-1) +"' >"+ str(page-1) +"</a> "
+		page_links += " " + str(page) + " "
+		if page < (maxPage - 1) :
+			page_links += " <a href='/_places?page="+ str(page+1) +"' >"+ str(page+1) +"</a> "
+		if page < (maxPage - 2) :
+			page_links += " <a href='/_places?page="+ str(page+2) +"' >"+ str(page+2) +"</a> "
+		if page < (maxPage - 3) :
+			page_links += " <a href='/_places?page="+ str(page+3) +"' >"+ str(page+3) +"</a> "
+		if page < (maxPage - 10) :
+			page_links += " ... <a href='/_places?page="+ str(page+10) +"' >"+ str(page+10) +"</a> "
+		if page < (maxPage - 20) :
+			page_links += " ... <a href='/_places?page="+ str(page+20) +"' >"+ str(page+20) +"</a> "
+		if page < (maxPage - 50) :
+			page_links += " ... <a href='/_places?page="+ str(page+50) +"' >"+ str(page+50) +"</a> "
+		page_links += " ... <a href='/_places?page="+ str(maxPage) +"' >"+ str(maxPage) +"</a> "
+		
+		self.render("places_list.html", pageLinks=page_links, places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
 
 
 	def render_id(self, place_id):
@@ -72,27 +98,29 @@ class placesHandler(handler.Handler):
 		myPlace.photos = []
 		myPlace.amenities = []
 		myPlace.unavailable = []
-		myPlace.origin = item["origin"]
-		myPlace.minimum_stay_night = item["minimumStayNight"]
-		myPlace.price_per = item["pricePer"]
-		myPlace.bed_count = item["bedCount"]
-		myPlace.occupancy = item["occupancy"]
-		myPlace.provider = item["provider"]
-		myPlace.description = item["description"]
-		myPlace.pid = item["pid"]
-		myPlace.price = item["price"]
-		myPlace.link = item["link"]
-		myPlace.country = item["country"]
-		myPlace.nid = item["nid"]
-		myPlace.bathroomcount = item["bathroomCount"]
-		myPlace.bedroomcount = item["bedroomCount"]
-		myPlace.heading = item["heading"]
-		myPlace.room_type = item["type"]["roomType"]
-		myPlace.room_type_alias = item["typeAlias"]["roomType"]
-		myPlace.prop_type = item["type"]["propType"]
-		myPlace.prop_type_alias = item["typeAlias"]["propType"]
-		myPlace.latitude = item["latLng"][0]
-		myPlace.longitude = item["latLng"][1]
+		if "origin" in item : myPlace.origin = item["origin"]
+		if "minimumStayNight"  in item : myPlace.minimum_stay_night = item["minimumStayNight"]
+		if "pricePer"  in item : myPlace.price_per = item["pricePer"]
+		if "bedCount"  in item : myPlace.bed_count = item["bedCount"]
+		if "occupancy"  in item : myPlace.occupancy = item["occupancy"]
+		if "provider"  in item : myPlace.provider = item["provider"]
+		if "description"  in item : myPlace.description = item["description"]
+		if "pid"  in item : myPlace.pid = item["pid"]
+		if "price"  in item : myPlace.price = item["price"]
+		if "link"  in item : myPlace.link = item["link"]
+		if "country" in item : myPlace.country = item["country"]
+		if "nid"  in item : myPlace.nid = item["nid"]
+		if "bathroomCount"  in item : myPlace.bathroomcount = item["bathroomCount"]
+		if "bedroomCount"  in item : myPlace.bedroomcount = item["bedroomCount"]
+		if "heading"  in item : myPlace.heading = item["heading"]
+		if "type"  in item : 
+			if "roomType" in item["type"] : myPlace.room_type = item["type"]["roomType"]
+			if "propType" in item["type"] : myPlace.prop_type = item["type"]["propType"]
+		if "typeAlias"  in item : 
+			if "roomType" in item["typeAlias"] : myPlace.room_type_alias = item["typeAlias"]["roomType"]
+			if "propType" in item["typeAlias"] : myPlace.prop_type_alias = item["typeAlias"]["propType"]
+		if "latLng"  in item : myPlace.latitude = item["latLng"][0]
+		if "latLng"  in item : myPlace.longitude = item["latLng"][1]
 		for amenity in item["amenities"]:
 			myPlace.amenities.append(amenity)
 		for unavlbl in item["unavailable"]:
@@ -128,7 +156,4 @@ class place:
 	unavailable=[]
 	amenities=[]
 	photos=[]
-	
-
-
 

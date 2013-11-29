@@ -20,7 +20,6 @@ app = webapp2.WSGIApplication([('/', hub.HubHandler),
 								('/(\d+)/surveys/new', surveyForm.SurveyFormHandler),
 								('/(\d+)/share', shareTrip.ShareTripHandler),
 								('/_yelp',yelpAPI.YelpAPIHandler),
-
 								('/.*', error.ErrorHandler)
 								]
 								, debug=True)

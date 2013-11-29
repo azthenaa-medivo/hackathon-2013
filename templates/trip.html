@@ -19,54 +19,53 @@
 {% endblock %}
 
 {% block content %}
-	<section class="trip">
-		<div class="page-heading">
-			<div class="trip-title">
-				<a href="" class="trip-title">{{trip.title}}</a>
-			</div>
-			<div class="post-date">
-				{{trip.created.strftime("%c")}}
-			</div>
+<section class="trip">
+	<div class="page-heading">
+		<div class="trip-title">
+			<a href="" class="trip-title">{{trip.title}}</a>
 		</div>
-		<section class="tripDescription formulaire-top">
-			<div>
-				<h2>
-					Description
-				</h2>
+		<div class="post-date">
+			{{trip.created.strftime("%c")}}
+		</div>
+	</div>
+	<section class="tripDescription formulaire-top">
+		<div>
+			<h2>
+				Description
+			</h2>
+		</div>
+		<div>{{trip.description}}</div>
+	</section>
+	<section class="formulaire-top">
+		<h2>
+			Comments
+		</h2>
+		{% if comments %}
+		<div class="comments">
+			{% for comment in comments %}
+			<div class="single-comment">
+				<table class="comments-table">
+					<tr class="comment">
+						<td class="commentUserName">
+							{{ comment.username }}
+						</td>
+						<td class="commentPosted">
+							{{ comment.posted.strftime("%c") }}
+						</td>
+					</tr>
+				</table>
+				<div class="commentMessage">
+					{{ comment.message }}
+				</div>
 			</div>
-			<div>{{trip.description}}</div>
-		</section>
-		<section class="formulaire-top">
-				<h2>
-					Comments
-				</h2>
-			{% if comments %}
-				<div>
+			{% endfor %}
+		</div>
+		{% else %}
+		<span class="no-comment">No comment~</span>
+		{% endif %}
+	</section>
+	<div class="commentForm formulaire">
 
-				</div>
-				<div class="comments">
-					<table class="comments-table">
-					{% for comment in comments %}
-						<tr class="comment">
-							<td class="commentUserName">
-								{{ comment.username }}
-							</td>
-							<td class="commentPosted">
-								{{ comment.posted.strftime("%c") }}
-							</td>
-						</tr>
-					</table>
-						<div class="commentMessage">
-							{{ comment.message }}
-						</div>
-					{% endfor %}
-				</div>
-			{% else %}
-				<span class="no-comment">No comment~</span>
-			{% endif %}
-		</section>
-		<div class="commentForm formulaire">
-			
 		<section id="main" class="commentFormulaire">
 			<div>
 				<h2>
@@ -98,7 +97,7 @@
 					</table>
 					<input class="submitButton" type="submit" value="Submit">
 				</form>
-		</div>
+			</div>
 		</section>
 	</div>
-{% endblock %}
+	{% endblock %}
