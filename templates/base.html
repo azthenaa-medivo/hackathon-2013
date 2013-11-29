@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 
- <HEAD>
-  <link rel="stylesheet" type="text/css" href="../static/style.css">
-  <link rel="stylesheet"  type="text/css" href="../static/flexslider.css">
-  <link rel="shortcut icon" type="image/x-icon" href="../static/favicon.ico" />
-  <link rel="icon" type="image/x-icon" href="../static/favicon.ico" />
-  <script src="../static/jquery.js"></script>
-  <script src="../static/jquery.flexslider.js"></script>
-  <script src="../static/utilities.js"></script>
-  <title>BroccoTrip</title>
- </HEAD>
- 
- <BODY>
- 	<div class="top-page">
+<HEAD>
+	<link rel="stylesheet" type="text/css" href="../static/style.css">
+	<link rel="stylesheet"  type="text/css" href="../static/flexslider.css">
+	<link rel="shortcut icon" type="image/x-icon" href="../static/favicon.ico" />
+	<link rel="icon" type="image/x-icon" href="../static/favicon.ico" />
+	<script src="../static/jquery.js"></script>
+	<script src="../static/jquery.flexslider.js"></script>
+	<script src="../static/utilities.js"></script>
+	<title>BroccoTrip</title>
+</HEAD>
+
+<BODY>
+	<div class="top-page">
 		<a href="/" class="top-a">
 			<div class="shadow">
 				<img class="top-image" src="../static/logo.png" />
@@ -35,7 +35,7 @@
 			</li>
 			<li>
 				<a href="/_join" title="Discuss the trip!">
-					Join a discussion hub
+					Join a trip
 				</a>
 			</li>
 			<li>
@@ -57,8 +57,10 @@
 		{% block content %}
 		{% endblock %}
 	</section>
-	<div class="backUp imageBU"><img src="../static/backup.png" /></div>
-	<div class="backUp textBU">wow<br>much going back</div>
+	<section class="footer">
+		<div class="backUp imageBU"><img src="../static/backup.png" /></div>
+		<div class="backUp textBU">wow<br>much going back</div>
+	</section>
 </body>
 
 </html>
