@@ -173,7 +173,7 @@ body {
 
 .centerError {
 	text-align:center;
-	}
+}
 	
 .shareTextArea {
 	height:250px;
@@ -211,6 +211,26 @@ body {
 
 .criteriaValue {
 	display: block
+}
+
+
+
+.backUp {
+  position: fixed;
+}
+
+.imageBU {
+  cursor: pointer;
+  bottom: 0px;
+  right: 0px;
+}
+
+.textBU {
+  text-align: right;
+  color: darkred;
+  cursor: default;
+  bottom: 10px;
+  right: 0px;
 }
 
 .newSearchButton {
