@@ -24,7 +24,7 @@
 				{% for place in places_list %}
 				<div class="place">
 					<span class="criteriaValue">
-						<a href='{{place.link}}'> {{place.heading | safe}} </a>
+						<a href='/_places?id={{place.pid}}'> {{place.heading | safe}} </a>
 					</span>
 					<span class="criteria">Location :</span><span class="criteriaValue">{{place.origin | safe}} </span>
 					<span class="criteria">Description :</span><span class="criteriaValue"> {{place.description | safe}} </span>
