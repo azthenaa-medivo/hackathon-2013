@@ -209,6 +209,8 @@
 
           slider.controlNavScaffold = $('<ol class="'+ namespace + 'control-nav ' + namespace + type + '"></ol>');
 
+          // YEAH THAT'S HERE
+
           if (slider.pagingCount > 1) {
             for (var i = 0; i < slider.pagingCount; i++) {
               slide = slider.slides.eq(i);
