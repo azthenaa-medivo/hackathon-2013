@@ -28,6 +28,39 @@ indexes:
   - name: posted
     direction: desc
 
+- kind: Proposition
+  properties:
+  - name: survey_id
+  - name: posted
+    direction: desc
+
+- kind: Proposition
+  ancestor: yes
+  properties:
+  - name: numero
+
+- kind: Proposition
+  ancestor: yes
+  properties:
+  - name: posted
+    direction: desc
+
+- kind: Survey
+  properties:
+  - name: trip_id
+
+- kind: Survey
+  properties:
+  - name: trip_id
+  - name: posted
+    direction: desc
+
+- kind: Survey
+  ancestor: yes
+  properties:
+  - name: posted
+    direction: desc
+
 - kind: WikiPage
   properties:
   - name: pageName
