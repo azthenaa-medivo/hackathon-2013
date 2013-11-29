@@ -28,6 +28,28 @@
 					Hub
 				</a>
 			</li>
+			{% if trip %}
+			<li>
+				<a href="/{{trip.key().id()}}" title="Back to the trip !">
+					Back to trip
+				</a>
+			</li>
+			<li>
+				<a href="/{{trip.key().id()}}/share" title="Share this trip">
+					Share
+				</a>
+			</li>
+			<li>
+				<a href="http://client01.chat.mibbit.com/?channel=%23broccotrip{{trip.key().id()}}&server=irc.chat-irc.fr" target="_blank" title="Join the chat room of this trip">
+					Chat room
+				</a>
+			</li>
+			<li>
+				<a href="/{{trip.key().id()}}/surveys" title="Look at the pools for this trip">
+					Polls
+				</a>	
+			</li>
+			{% else %}
 			<li>
 				<a href="/_create" title="Create a new trip!">
 					Make a trip
@@ -38,9 +60,10 @@
 					Join a trip
 				</a>
 			</li>
+			{% endif %}
 			<li>
 				<a href="/_places" title="Go to the hub">
-					Search on Outspot
+					Places
 				</a>
 			</li>
 			<li>
@@ -48,8 +71,6 @@
 					Search on Yelp
 				</a>
 			</li>
-			{% block menu %}
-			{% endblock %}
 		</ul>
 	</div>
 	<br>

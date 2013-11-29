@@ -92,3 +92,4 @@ class SurveyListHandler(handler.Handler):
 						break
 				
 				self.redirect("/"+trip_id+"/surveys")
+
