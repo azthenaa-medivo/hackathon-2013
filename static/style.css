@@ -127,6 +127,30 @@ body {
 	border-bottom: solid 0px #FF0000;
 }
 
+.comment-form {
+	text-align: left;
+}
+
+.comments {
+	text-align: left;
+}
+
+.commentUserName {
+	display: inline-block;
+}
+
+.b {
+	height: 100px;
+	width: 300px;
+	max-width: 300px;
+	max-height: 100px;
+}
+
+.submitButton
+{
+	padding: 10px;
+}
+
 .error-image {
 	display: inline-block;
 	vertical-align: middle;
@@ -155,5 +179,4 @@ body {
 	background-color: #F0FFF0;
 	border: solid 5px #00B815;
 	border-bottom: none;
-	border-radius: 10px;
 }
