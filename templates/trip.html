@@ -2,11 +2,6 @@
 
 {% block menu %}
 <li>
-	<a href="/{{trip.key().id()}}/comment" title="Comment this trip">
-		Comment
-	</a>
-</li>
-<li>
 	<a href="/{{trip.key().id()}}/share" title="Share this trip">
 		Share
 	</a>
@@ -28,25 +23,74 @@
 				{{trip.created.strftime("%c")}}
 			</div>
 		</div>
-		<section class="tripDescription">{{trip.description}}</section>
+		<section class="tripDescription">
+			<div>
+				<h2>
+					Description
+				</h2>
+			</div>
+			<div>{{trip.description}}</div>
+		</section>
 		<section class="formulaire">
 			{% if comments %}
-			<div class="comments">
-				{% for comment in comments %}
-					<div class="comment">
-						<div class="commentUserName">
-							{{ comment.username }}
+				<div>
+					<h2>
+						Comments
+					</h2>
+				</div>
+				<div class="comments">
+					{% for comment in comments %}
+						<div class="comment">
+							<div class="commentUserName">
+								{{ comment.username }}
+							</div>
+							<div class="commentPosted">
+								{{ comment.posted.strftime("%c") }}
+							</div>
+							<div class="commentMessage">
+								{{ comment.message }}
+							</div>
 						</div>
-						<div class="commentPosted">
-							{{ comment.posted.strftime("%c") }}
-						</div>
-						<div class="commentMessage">
-							{{ comment.message }}
-						</div>
-					</div>
-				{% endfor %}
-			</div>
+					{% endfor %}
+				</div>
 			{% endif %}
+		</section>
+		<div class="commentForm">
+			
+		<section id="main" class="commentFormulaire">
+			<div>
+				<h2>
+					Add a comment
+				</h2>
+			</div>
+			<div class="comment-form">
+				<form method="post">
+					<table>
+						<tr>
+							<td class="label">
+									Username
+							</td>
+							<td>
+								<input type="text" name="username" value="{{ username }}" required>
+							</td>
+							<td class="error">
+								{{ error_username }}
+							</td>
+						</tr>
+						<tr>
+							<td class="label">
+								Message
+							</td>
+							<td>
+								<textarea name="message" required>{{ message }}</textarea>
+							</td>
+						</tr>
+					</table>
+					<div style="text-align:center">
+						<input type="submit" value="submit">
+					</div>
+				</form>
+			</div>
 		</section>
 	</div>
 {% endblock %}

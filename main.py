@@ -6,7 +6,6 @@ import tripForm
 import error
 import joinHubForm
 import places
-import commentForm
 import shareTrip
 		
 app = webapp2.WSGIApplication([('/', hub.HubHandler),
@@ -14,7 +13,6 @@ app = webapp2.WSGIApplication([('/', hub.HubHandler),
 								('/_join', joinHubForm.JoinHubHandler),
 								('/_places', places.placesHandler),
 								('/(\d+)', trip.TripHandler),
-								('/(\d+)/comment', commentForm.CommentFormHandler),
 								('/(\d+)/share', shareTrip.ShareTripHandler),
 								('/.*', error.ErrorHandler)
 								]

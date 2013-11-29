@@ -142,9 +142,18 @@ body {
 	width:500px;
 }
 
+.commentFormulaire {
+	padding: 10px;
+	background-color: #F0FFF0;
+	border: solid 5px #00B815;
+	border-top: none;
+	border-radius: 10px;
+}
+
 .tripDescription  {
 	padding: 10px;
 	background-color: #F0FFF0;
 	border: solid 5px #00B815;
 	border-bottom: none;
 	border-radius: 10px;
+}
