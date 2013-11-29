@@ -15,70 +15,71 @@ class placesHandler(handler.Handler):
 		if self.request.get('id'):
 			self.render_id(self.request.get('id'))
 		elif self.request.get('city'):
-			self.render_city(self.request.get('city'))
-		elif self.request.get('page'):
-			self.render_page(self.request.get('page'))
+			self.render_city(self.request.get('city'), False)
 		else:
 			self.render_all()
 		
 	def post(self):
 		if self.request.get('citySearch'):
-			self.render_city(self.request.get('citySearch'))
+			self.render_city(self.request.get('citySearch'), True)
 
 
 	def render_all(self):
-		plain = self.process(self.url_places)
-		jSon = json.loads(plain)
-		places_list = []
-		for item in jSon["items"]:
-			places_list.append(self.jSonToPlace(item))
-		self.render("places_list.html", places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
+		if self.request.get('page'):
+			self.render_page(self.request.get('page'))
+		else: 
+			self.render_page("1")
 
-	def render_city(self, city):
-		url = self.url_places + "?city=" + city.replace(' ', '+').replace('	', '+')
-		plain = self.process(self.url_places)
-		jSon = json.loads(plain)
-		places_list = []
-		for item in jSon["items"]:
-			places_list.append(self.jSonToPlace(item))
-		self.render("places_list.html", city=city, places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
+	def render_city(self, city, post):
+		citySearch = "city=" + city.replace(' ', '+').replace('	', '+')
+		url = self.url_places + "?" + citySearch
+		if not post and self.request.get('page'):
+			self.render_page(self.request.get('page'), url, citySearch)
+		else: 
+			self.render_page('1', url, citySearch)
 
-	def render_page(self, page_s):
+	def render_page(self, page_s, url_base = "", citySearch = ""):
 		page = int(page_s)
-
-		url = self.url_places + "?page=" + str(page)
+		if url_base == "" : url_base = self.url_places + "?"
+		else: url_base += "&"
+		url = url_base + "page=" + str(page)
 		plain = self.process(url)
 		jSon = json.loads(plain)
+
+		maxPage = int(jSon["totalPages"])
+		page_links = self.genPageLinks(page, maxPage, citySearch)
+
 		places_list = []
 		for item in jSon["items"]:
 			places_list.append(self.jSonToPlace(item))
 
-		maxPage = int(jSon["totalPages"])
-		page_links = ""
-
-		if page > 1:
-			page_links += " <a href='/_places?page=1' >1</a> "
-		if page > 3:
-			page_links += " ... <a href='/_places?page="+ str(page-2) +"' >"+ str(page-2) +"</a> "
-		if page > 2:
-			page_links += " <a href='/_places?page="+ str(page-1) +"' >"+ str(page-1) +"</a> "
-		page_links += " " + str(page) + " "
-		if page < (maxPage - 1) :
-			page_links += " <a href='/_places?page="+ str(page+1) +"' >"+ str(page+1) +"</a> "
-		if page < (maxPage - 2) :
-			page_links += " <a href='/_places?page="+ str(page+2) +"' >"+ str(page+2) +"</a> "
-		if page < (maxPage - 3) :
-			page_links += " <a href='/_places?page="+ str(page+3) +"' >"+ str(page+3) +"</a> "
-		if page < (maxPage - 10) :
-			page_links += " ... <a href='/_places?page="+ str(page+10) +"' >"+ str(page+10) +"</a> "
-		if page < (maxPage - 20) :
-			page_links += " ... <a href='/_places?page="+ str(page+20) +"' >"+ str(page+20) +"</a> "
-		if page < (maxPage - 50) :
-			page_links += " ... <a href='/_places?page="+ str(page+50) +"' >"+ str(page+50) +"</a> "
-		page_links += " ... <a href='/_places?page="+ str(maxPage) +"' >"+ str(maxPage) +"</a> "
 		
 		self.render("places_list.html", pageLinks=page_links, places_list=places_list, page=jSon["page"], total_pages=jSon["totalPages"], total_results=jSon["totalResults"])
 
+	def genPageLinks (self, page, maxPage, citySearch = ""):
+		page_links = ""
+		if citySearch != "" : citySearch = "&" + citySearch
+		if page > 1:
+			page_links += " <a href='/_places?page=1"+ citySearch +"' >1</a> "
+		if page > 3:
+			page_links += " ... <a href='/_places?page="+ str(page-2) +""+ citySearch +"' >"+ str(page-2) +"</a> "
+		if page > 2:
+			page_links += " <a href='/_places?page="+ str(page-1) +""+ citySearch +"' >"+ str(page-1) +"</a> "
+		page_links += " " + str(page) + " "
+		if page < (maxPage - 1) :
+			page_links += " <a href='/_places?page="+ str(page+1) +""+ citySearch +"' >"+ str(page+1) +"</a> "
+		if page < (maxPage - 2) :
+			page_links += " <a href='/_places?page="+ str(page+2) +""+ citySearch +"' >"+ str(page+2) +"</a> "
+		if page < (maxPage - 3) :
+			page_links += " <a href='/_places?page="+ str(page+3) +""+ citySearch +"' >"+ str(page+3) +"</a> "
+		if page < (maxPage - 10) :
+			page_links += " ... <a href='/_places?page="+ str(page+10) +""+ citySearch +"' >"+ str(page+10) +"</a> "
+		if page < (maxPage - 20) :
+			page_links += " ... <a href='/_places?page="+ str(page+20) +""+ citySearch +"' >"+ str(page+20) +"</a> "
+		if page < (maxPage - 50) :
+			page_links += " ... <a href='/_places?page="+ str(page+50) +"' >"+ str(page+50) +"</a> "
+		page_links += " ... <a href='/_places?page="+ str(maxPage) +""+ citySearch +"' >"+ str(maxPage) +"</a> "
+		return page_links
 
 	def render_id(self, place_id):
 		url = self.url_places + "?pid=" + place_id
